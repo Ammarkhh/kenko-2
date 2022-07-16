@@ -1,0 +1,14 @@
+{% extends "index.html" %} {% block main %} {# Carausel #}
+  <ul>
+    <li>{{ user.first_name|title }} {{ user.last_name|title }}</li>
+    <li>{{ user.age }} Years</li>
+    <li>{{ user.weight }} kg</li>
+    <li>{{ user.height }} cm</li>
+    <li>BMI: {{ user.bmi }}</li>
+  </ul>
+
+  <h1>Daily Workout</h1>
+  <ul>
+
+  </ul>
+{% endblock %} {% block title %}Hub{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "index.html" %} {% block main %}
+<section class="auth-section">
+  <div class="container">
+    <div class="form-signin rounded-4">
+      <form method="POST">
+        {% csrf_token %} <img class="mb-4" src="{% static "imgs/logo.svg" %}"
+        alt="Kenko Logo" width="72" height="57">
+
+        <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+
+        {{ form.non_field_errors }} {% for field in form %}
+        <div class="form-floating mb-4">
+          <input
+            class="form-control"
+            id="{{ field.id_for_label }}"
+            type="{{ field.widget_type }}"
+            name="{{ field.html_name }}"
+            {% if field.value %}value="{{ field.value }}"{% endif %}
+            required
+          />
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+          {# Help #} {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %} {# Errors #} {% if field.errors %}
+          <div
+            class="invalid-feedback d-block {% if field.errors %}is-invalid{% endif %}"
+          >
+            {% for error in field.errors %}
+            <li class="text-danger">{{ error|escape }}</li>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %} {% block title %}Login{% endblock %}

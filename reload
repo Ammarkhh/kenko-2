@@ -1,0 +1,14 @@
+#!/bin/bash
+eval "$(ssh-agent -s)"
+ssh-add /home/ammar/.ssh/Ammarkhh_github
+git pull
+source ./.venv/bin/activate
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic
+python -m pip install -r ./requirements.txt
+deactivate
+sudo chown ammar:www-data -R .
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn.kenko.socket gunicorn.kenko.service
+sudo nginx -t && sudo systemctl restart nginx

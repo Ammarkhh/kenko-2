@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container align-items-center">
+    {# Brand Logo #}
+    <a class="navbar-brand" href="#">
+      <img src="{% static "imgs/logo.svg" %}" alt="kenko logo" height="40"/>
+    </a>
+
+    {# Mobile Navigation Button #}
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {# Navbar Content #}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {# Navbar Links #}
+      <ul class="navbar-nav w-100 mb-2 mb-lg-0">
+        <span class="ms-auto"></span>
+
+        {# Home #}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page"
+             href="{% url "home" %}">Home</a>
+        </li>
+        {# Fitness #}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'fitness' %}active{% endif %}" aria-current="page"
+             href="{% url "fitness" %}">Fitness</a>
+        </li>
+        {# Nutrition #}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'nutrition' %}active{% endif %}"
+             aria-current="page" href="#">Nutrition</a>
+        </li>
+        {# Hub #}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'hub' %}active{% endif %}" aria-current="page"
+             href="{% url "hub" %}">Hub</a>
+        </li>
+        {# About #}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" aria-current="page"
+             href="#">About</a>
+        </li>
+
+        <span class="me-auto"></span>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <div class="nav-item-btn py-1">
+            <a class="btn btn-link btn-sm rounded-pill" href="{% url "logout" %}">{{ user.first_name|title }} Logout</a>
+          </div>
+        </li>
+        {% else %}
+        {# Login #}
+          <li class="nav-item">
+            <div class="nav-item-btn py-1">
+              <a class="btn btn-link btn-sm rounded-pill" href="{% url "login" %}">Login</a>
+            </div>
+          </li>
+
+          {# Signup #}
+          <li class="nav-item">
+            <div class="nav-item-btn py-1">
+              <a class="btn btn-primary btn-sm rounded-pill" href="#">Get Started</a>
+            </div>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
